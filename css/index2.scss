@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+//三角形的宽高
+$height: 24px;
+$width: 12px;
+
+//对平行四边形三部分的颜色进行赋值
+@mixin parallelogram-color($color) {
+  background: $color;
+  &:before { border-color: transparent $color $color transparent; }
+  &:after { border-color: $color transparent transparent $color; }
+}
+
+//单个三角形的样式
+@mixin triangle() {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  position: absolute;
+  border-style: solid;
+  border-width: $height/2 $width/2;
+  top: 0;
+}
+
+//平行四边形的样式
+.para {
+  display: inline-block;
+  position: relative;
+  padding: 0 10px;
+  height: $height;
+  line-height: $height;
+  margin-left: $width;
+  color: #fff;
+
+  &:after {
+    @include triangle();
+    right: -$width;
+  }
+
+  &:before {
+    @include triangle();
+    left: -$width;
+  }
+
+  @include parallelogram-color(red);
+}
+
+
+// 二
+.city{
+  border:1px solid #44a5fc;
+  display: inline-block;
+  padding:5px 20px;
+  color:#333;
+  transform: skew(-20deg);
+}
+.city div{
+  transform:skew(20deg);
+}
